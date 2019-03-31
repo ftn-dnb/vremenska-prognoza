@@ -13,7 +13,7 @@ namespace WeatherForecast
     {
         private string apiUrl;
         private HttpWebRequest request;
-        private Weather weather;
+        public Weather Weather { get; set; }
 
         private Thread thread;
 
@@ -33,9 +33,7 @@ namespace WeatherForecast
             while (true)
             {
                 string response = GetDataFromAPI();
-                weather = JsonConvert.DeserializeObject<Weather>(response);
-
-                Console.WriteLine(weather.city.name + " " + weather.city.id);
+                Weather = JsonConvert.DeserializeObject<Weather>(response);
 
                 Thread.Sleep(10 * 60 * 1000); // Every 10min get new data 
             }
