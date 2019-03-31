@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace WeatherForecast
     {
         private string apiUrl;
         private HttpWebRequest request;
+        private Weather weather;
 
         private Thread thread;
 
@@ -31,7 +33,10 @@ namespace WeatherForecast
             while (true)
             {
                 string response = GetDataFromAPI();
-                Console.WriteLine(response);
+                weather = JsonConvert.DeserializeObject<Weather>(response);
+
+                Console.WriteLine(weather.city.name + " " + weather.city.id);
+
                 Thread.Sleep(10 * 60 * 1000); // Every 10min get new data 
             }
         }
