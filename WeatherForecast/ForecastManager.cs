@@ -22,12 +22,8 @@ namespace WeatherForecast
             request.AutomaticDecompression = DecompressionMethods.GZip;
 
             thread = new Thread(new ThreadStart(ReadData));
+            thread.IsBackground = true;
             thread.Start();
-        }
-
-        public void StopThread()
-        {
-            thread.Abort();
         }
 
         private void ReadData()
