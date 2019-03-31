@@ -23,6 +23,7 @@ namespace WeatherForecast
         public MainWindow()
         {
             InitializeComponent();
+            ForecastManager forecastManager = new ForecastManager();
         }
     }
 }
