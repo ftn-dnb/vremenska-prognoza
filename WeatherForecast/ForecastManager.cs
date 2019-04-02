@@ -11,7 +11,8 @@ namespace WeatherForecast
 {
     public class ForecastManager
     {
-        private const string cityListFilePath = "../../resources/city_list.json";
+        private const string cityListFilePath = @"../../resources/city_list.json";
+        private const string urlGeoIpDb = @"https://geoip-db.com/json";
 
         public Weather Weather { get; set; }
         private string apiUrl;
@@ -20,7 +21,7 @@ namespace WeatherForecast
 
         public ForecastManager()
         {
-            CreateUrl(524901); // This is ID for Moscow, for now it'll be the default city
+            FindMyLocation();
 
             ReadCityList();
             RefreshData();
@@ -54,10 +55,25 @@ namespace WeatherForecast
             Weather = JsonConvert.DeserializeObject<Weather>(response);
         }
 
+        // Creates new URL for API request based on latitude and longitude of the location
+        private void CreateUrl(float latitude, float longitude)
+        {
+            apiUrl = @"http://api.openweathermap.org/data/2.5/forecast?lat=" 
+                    + latitude + "&lon=" + longitude + "&APPID=ba8c996f1de322109b5e38009ce08b63";
+        }
+
         // Creates new URL for API request based on city id
         private void CreateUrl(int cityId)
         {
-            apiUrl = @"http://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&APPID=ba8c996f1de322109b5e38009ce08b63";
+            apiUrl = @"http://api.openweathermap.org/data/2.5/forecast?id=" 
+                    + cityId + "&APPID=ba8c996f1de322109b5e38009ce08b63";
+        }
+
+        private void FindMyLocation()
+        {
+            string data = new WebClient().DownloadString(urlGeoIpDb);
+            IPLocation location = JsonConvert.DeserializeObject<IPLocation>(data);
+            CreateUrl(location.latitude, location.longitude);
         }
 
         // Reads new data every 10 minutes from the API

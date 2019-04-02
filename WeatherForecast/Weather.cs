@@ -70,4 +70,11 @@ namespace WeatherForecast
     {
         public IList<City> cities { get; set; }
     }
+
+    public class IPLocation
+    {
+        public float latitude { get; set; }
+
+        public float longitude { get; set; }
+    }
 }
