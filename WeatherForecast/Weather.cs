@@ -65,4 +65,9 @@ namespace WeatherForecast
         public City city { get; set; }
         public IList<WeatherListItem> list { get; set; }
     }
+
+    public class CityList
+    {
+        public IList<City> cities { get; set; }
+    }
 }
