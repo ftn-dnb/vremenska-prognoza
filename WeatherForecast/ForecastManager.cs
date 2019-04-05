@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 
@@ -92,10 +94,29 @@ namespace WeatherForecast
 
         private void FindMyLocation()
         {
+
+            disableCertificate();
             string data = new WebClient().DownloadString(urlGeoIpDb);
             IPLocation location = JsonConvert.DeserializeObject<IPLocation>(data);
             CreateUrl(location.latitude, location.longitude);
         }
+
+        static void disableCertificate()
+        {
+            // Disabling certificate validation can expose you to a man-in-the-middle attack
+            // which may allow your encrypted message to be read by an attacker
+            // https://stackoverflow.com/a/14907718/740639
+            ServicePointManager.ServerCertificateValidationCallback =
+                delegate (
+                    object s,
+                    X509Certificate certificate,
+                    X509Chain chain,
+                    SslPolicyErrors sslPolicyErrors
+                ) {
+                    return true;
+                };
+        }
+
 
         // Reads new data every 10 minutes from the API
         private void ReadData()
