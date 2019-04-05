@@ -35,16 +35,12 @@ namespace WeatherForecast
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public ForecastManager()
         {
             FindMyLocation();
-
             ReadCityList();
             RefreshData();
 
@@ -80,12 +76,9 @@ namespace WeatherForecast
 
         private void FixData()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-
             for (int i = 0; i < weather.list.Count(); i++)
             {
-                weather.list[i].weather[0].icon = projectDirectory + @"/resources/icons/" + weather.list[i].weather[0].icon + ".png";
+                weather.list[i].weather[0].icon = @"./res/icons/" + weather.list[i].weather[0].icon + ".png";
                 weather.list[i].main.temp = weather.list[i].main.temp - 272.15;
                 weather.list[i].main.temp_min = weather.list[i].main.temp_min - 272.15;
                 weather.list[i].main.temp_max = weather.list[i].main.temp_max - 272.15;

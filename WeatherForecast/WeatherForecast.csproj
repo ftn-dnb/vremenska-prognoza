@@ -99,12 +99,33 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="res\city_list.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="res\" />
+    <Resource Include="res\icons\01d.png" />
+    <Resource Include="res\icons\01n.png" />
+    <Resource Include="res\icons\02d.png" />
+    <Resource Include="res\icons\02n.png" />
+    <Resource Include="res\icons\03d.png" />
+    <Resource Include="res\icons\03n.png" />
+    <Resource Include="res\icons\04d.png" />
+    <Resource Include="res\icons\04n.png" />
+    <Resource Include="res\icons\09d.png" />
+    <Resource Include="res\icons\09n.png" />
+    <Resource Include="res\icons\10d.png" />
+    <Resource Include="res\icons\10n.png" />
+    <Resource Include="res\icons\11d.png" />
+    <Resource Include="res\icons\11n.png" />
+    <Resource Include="res\icons\13d.png" />
+    <Resource Include="res\icons\13n.png" />
+    <Resource Include="res\icons\50d.png" />
+    <Resource Include="res\icons\50n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
