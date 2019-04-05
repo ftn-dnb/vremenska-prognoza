@@ -38,22 +38,53 @@
                     <RowDefinition Height = "*" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Label>
-                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">SLIKA</Label>
-                <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">21 C</Label>
-                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Light rain</Label>
-                <Label Grid.Row="3" Grid.Column="0">Min. temp: 5 C</Label>
-                <Label Grid.Row="3" Grid.Column="1">Max. temp: 25 C</Label>
-                <Label Grid.Row="4" Grid.Column="0">Pressure: 20mbar</Label>
-                <Label Grid.Row="4" Grid.Column="1">Humidity: 69%</Label>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                    <Run Text="{Binding Weather.city.name}" FontWeight="Bold" FontSize="24" />
+                    <Run Text="{Binding Weather.city.country}" FontWeight="Bold" FontSize="24" />
+                </TextBlock>
+
+                <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon}" 
+                       Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" />
+
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">
+                    <Run Text="{Binding Weather.list[0].main.temp, StringFormat=F0}" />
+                    <Run Text="&#186;C" />
+                </TextBlock>
+                
+                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18">
+                    <Run Text="{Binding Weather.list[0].weather[0].description}" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="3">
+                    <Run Text="Min. temp:" />
+                    <Run Text="{Binding Weather.list[0].main.temp_min, StringFormat=F0}" />
+                    <Run Text="&#186;C" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="3">
+                    <Run Text="Max. temp:" />
+                    <Run Text="{Binding Weather.list[0].main.temp_max, StringFormat=F0}" />
+                    <Run Text="&#186;C" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="3">
+                    <Run Text="Pressure:" />
+                    <Run Text="{Binding Weather.list[0].main.pressure}" />
+                    <Run Text="mbar" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="3">
+                    <Run Text="Humidity:" />
+                    <Run Text="{Binding Weather.list[0].main.humidity}" />
+                    <Run Text="%" />
+                </TextBlock>
             </Grid>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                
-            </StackPanel>
         
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+            </StackPanel>
         </DockPanel>
     </DockPanel>
 </Window>

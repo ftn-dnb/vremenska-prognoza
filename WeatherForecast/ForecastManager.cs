@@ -17,9 +17,12 @@ namespace WeatherForecast
         private const string cityListFilePath = @"../../resources/city_list.json";
         private const string urlGeoIpDb = @"https://geoip-db.com/json";
 
+        private string apiUrl;
+        private Thread thread;
+        private CityList cityList;
 
         private Weather weather;
-        public Weather CalculatorOutput
+        public Weather Weather
         {
             get { return weather; }
             set
@@ -28,10 +31,6 @@ namespace WeatherForecast
                 OnPropertyChanged("Weather");
             }
         }
-
-        private string apiUrl;
-        private Thread thread;
-        private CityList cityList;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
@@ -76,6 +75,21 @@ namespace WeatherForecast
         {
             string response = GetDataFromAPI();
             weather = JsonConvert.DeserializeObject<Weather>(response);
+            FixData();
+        }
+
+        private void FixData()
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+
+            for (int i = 0; i < weather.list.Count(); i++)
+            {
+                weather.list[i].weather[0].icon = projectDirectory + @"/resources/icons/" + weather.list[i].weather[0].icon + ".png";
+                weather.list[i].main.temp = weather.list[i].main.temp - 272.15;
+                weather.list[i].main.temp_min = weather.list[i].main.temp_min - 272.15;
+                weather.list[i].main.temp_max = weather.list[i].main.temp_max - 272.15;
+            }
         }
 
         // Creates new URL for API request based on latitude and longitude of the location

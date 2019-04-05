@@ -26,6 +26,7 @@ namespace WeatherForecast
         {
             InitializeComponent();
             forecastManager = new ForecastManager();
+            this.DataContext = forecastManager;
         }
 
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
