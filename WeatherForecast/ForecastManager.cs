@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,15 +10,35 @@ using System.Threading;
 
 namespace WeatherForecast
 {
-    public class ForecastManager
+    public class ForecastManager : INotifyPropertyChanged
     {
         private const string cityListFilePath = @"../../resources/city_list.json";
         private const string urlGeoIpDb = @"https://geoip-db.com/json";
 
-        public Weather Weather { get; set; }
+
+        private Weather weather;
+        public Weather CalculatorOutput
+        {
+            get { return weather; }
+            set
+            {
+                weather = value;
+                OnPropertyChanged("Weather");
+            }
+        }
+
         private string apiUrl;
         private Thread thread;
         private CityList cityList;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         public ForecastManager()
         {
@@ -52,7 +73,7 @@ namespace WeatherForecast
         public void RefreshData()
         {
             string response = GetDataFromAPI();
-            Weather = JsonConvert.DeserializeObject<Weather>(response);
+            weather = JsonConvert.DeserializeObject<Weather>(response);
         }
 
         // Creates new URL for API request based on latitude and longitude of the location
