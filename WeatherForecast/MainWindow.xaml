@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WeatherForecast" x:Class="WeatherForecast.MainWindow"
-        Title="Primeri upotrebe WPF" Height="350" Width="525">
+        Title="Weather Forecast" Height="350" Width="525">
     <DockPanel>
 
         <Menu DockPanel.Dock ="Top">
@@ -13,7 +13,7 @@
             </Menu.ItemsPanel>
 
 
-            <Button x:Name="btn_refresh" Content="Refresh" />
+            <Button x:Name="btn_refresh" Content="Refresh" Click="btn_refresh_Click" />
 
             <Button x:Name="btn_add_fav" Content="Add to favourites"/>
 
@@ -24,8 +24,36 @@
             <TextBox x:Name="Search" Width="170" />
         </Menu>
 
-        <DockPanel>
-            
+        <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+            <Grid x:Name = "LayoutMainInfo" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Label>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">SLIKA</Label>
+                <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">21 C</Label>
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">Light rain</Label>
+                <Label Grid.Row="3" Grid.Column="0">Min. temp: 5 C</Label>
+                <Label Grid.Row="3" Grid.Column="1">Max. temp: 25 C</Label>
+                <Label Grid.Row="4" Grid.Column="0">Pressure: 20mbar</Label>
+                <Label Grid.Row="4" Grid.Column="1">Humidity: 69%</Label>
+            </Grid>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                
+            </StackPanel>
+        
         </DockPanel>
     </DockPanel>
 </Window>

@@ -20,10 +20,17 @@ namespace WeatherForecast
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ForecastManager forecastManager;
+
         public MainWindow()
         {
             InitializeComponent();
-            ForecastManager forecastManager = new ForecastManager();
+            forecastManager = new ForecastManager();
+        }
+
+        private void btn_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            forecastManager.RefreshData();
         }
     }
 }
