@@ -22,8 +22,14 @@ namespace WeatherForecast
         private Thread thread;
         private CityList cityList;
 
+        private City selected;
+
         public IEnumerable<City> Cities { get; }
-        public City SelectedCity { get; set; }
+        public City SelectedCity
+        {
+            get { return selected; }
+            set { selected = value; }
+        }
         private int counter = 0;
         public void resetCounter()
         {
@@ -68,6 +74,7 @@ namespace WeatherForecast
             {
                 (Cities as List<City>).Add(city);
             }
+            
             
             thread = new Thread(new ThreadStart(ReadData));
             thread.IsBackground = true;
