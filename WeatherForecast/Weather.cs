@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
+
 namespace WeatherForecast
 {
+    
     public class City
     {
         public int id { get; set; }

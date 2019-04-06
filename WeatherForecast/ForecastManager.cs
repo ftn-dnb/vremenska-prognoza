@@ -9,6 +9,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace WeatherForecast
 {
@@ -20,6 +21,24 @@ namespace WeatherForecast
         private string apiUrl;
         private Thread thread;
         private CityList cityList;
+
+        public IEnumerable<City> Cities { get; }
+        public City SelectedCity { get; set; }
+        private int counter = 0;
+        public void resetCounter()
+        {
+            counter = 0;
+        }
+        public AutoCompleteFilterPredicate<object> CityFilter
+        {
+            get
+            {
+                return (searchText, obj) =>
+                (obj as City).name.StartsWith(searchText)
+                && counter++ < 1000;
+            }
+        }
+
 
         private Weather weather;
         public Weather Weather
@@ -44,6 +63,12 @@ namespace WeatherForecast
             ReadCityList();
             RefreshData();
 
+            Cities = new List<City>();
+            foreach (var city in cityList.cities)
+            {
+                (Cities as List<City>).Add(city);
+            }
+            
             thread = new Thread(new ThreadStart(ReadData));
             thread.IsBackground = true;
             thread.Start();

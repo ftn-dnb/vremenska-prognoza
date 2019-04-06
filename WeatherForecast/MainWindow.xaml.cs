@@ -34,5 +34,10 @@ namespace WeatherForecast
         {
             forecastManager.RefreshData();
         }
+
+        private void keyUpSearch(object sender, KeyEventArgs e)
+        {
+            forecastManager.resetCounter();
+        }
     }
 }

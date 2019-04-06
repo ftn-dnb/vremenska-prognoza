@@ -2,7 +2,19 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WeatherForecast" x:Class="WeatherForecast.MainWindow"
+        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         Title="Weather Forecast" Width="720" Height="520" MinWidth="640" MinHeight="480">
+    <Window.Resources>
+        <DataTemplate x:Key="CustomTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="{Binding name}"
+                       Width="100" />  
+                <Label Content="{Binding country}"
+                       FontStyle="Italic"
+                       Foreground="DarkGray" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <DockPanel>
         <DockPanel.Background>
             <ImageBrush ImageSource="./res/background.jpg" Stretch="UniformToFill"/>
@@ -24,7 +36,17 @@
 
             <Button x:Name="btn_show_history" Content="History"/>
 
-            <TextBox x:Name="Search" Width="170" />
+            
+
+            <toolkit:AutoCompleteBox ItemsSource="{Binding Cities}"
+                                     SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
+                                     ValueMemberPath="name"
+                                     ItemTemplate="{StaticResource CustomTemplate}"
+                                     ItemFilter="{Binding CityFilter}"
+                                     Width="170"
+                                     Padding="5,3,5,3"
+                                     x:Name="Search" KeyUp="keyUpSearch"/>
+
         </Menu>
 
         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Center">
