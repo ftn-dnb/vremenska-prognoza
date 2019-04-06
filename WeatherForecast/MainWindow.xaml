@@ -8,35 +8,52 @@
         <DataTemplate x:Key="CustomTemplate">
             <StackPanel Orientation="Horizontal">
                 <Label Content="{Binding name}"
-                       Width="100" />  
+                       Width="100" />
                 <Label Content="{Binding country}"
                        FontStyle="Italic"
                        Foreground="DarkGray" />
             </StackPanel>
         </DataTemplate>
+
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
+    
     <DockPanel>
         <DockPanel.Background>
-            <ImageBrush ImageSource="./res/background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="./res/background.png" Stretch="UniformToFill"/>
         </DockPanel.Background>
 
-        <Menu DockPanel.Dock ="Top" Background="Transparent" >
+        <Menu DockPanel.Dock ="Top">
+            <Menu.Background>
+                <SolidColorBrush Color="#00356b" Opacity="0.3" />
+            </Menu.Background>
+
             <Menu.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Center" Margin="10" />
+                    <DockPanel HorizontalAlignment="Center" Margin="5" />
                 </ItemsPanelTemplate>
             </Menu.ItemsPanel>
 
+            <Button x:Name="btn_refresh" Click="btn_refresh_Click" Background="Transparent" BorderThickness="0"
+                    Style="{StaticResource MyButtonStyle}" ToolTip="Refresh">
+                <Image Source="./res/icons/refresh.png" Width="32" Height="32"></Image>
+            </Button>
 
-            <Button x:Name="btn_refresh" Content="Refresh" Click="btn_refresh_Click" />
-
-            <Button x:Name="btn_add_fav" Content="Add to favourites"/>
-
-            <Button x:Name="btn_show_favs" Content="Favs" />
-
-            <Button x:Name="btn_show_history" Content="History"/>
-
-            
+            <Button x:Name="btn_add_fav" Background="Transparent" BorderThickness="0"
+                    Style="{StaticResource MyButtonStyle}" ToolTip="Add to favourites">
+                <Image Source="./res/icons/addtofav.png" Width="32" Height="32"></Image>
+            </Button>
 
             <toolkit:AutoCompleteBox ItemsSource="{Binding Cities}"
                                      SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
@@ -44,15 +61,26 @@
                                      ItemTemplate="{StaticResource CustomTemplate}"
                                      ItemFilter="{Binding CityFilter}"
                                      IsTextCompletionEnabled="True"
-                                     Width="170"
+                                     Height="32"
+                                     Width="170" 
                                      Padding="5,3,5,3"
-                                     x:Name="Search" KeyUp="keyUpSearch" SelectionChanged="selectChangedSearch"/>
+                                     VerticalAlignment="Center"
+                                     FontSize="16"
+                                     ToolTip="Search by a city name"
+                                     x:Name="Search" KeyUp="keyUpSearch" SelectionChanged="selectChangedSearch">
+
+            </toolkit:AutoCompleteBox>
+
+            <Button x:Name="btn_show_favs" Content="Favs" />
+
+            <Button x:Name="btn_show_history" Content="History"/>
 
         </Menu>
 
         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Center">
-            
-            <Grid x:Name = "LayoutMainInfo" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+            <Grid x:Name = "LayoutMainInfo" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "Auto" />
                     <ColumnDefinition />
@@ -73,14 +101,14 @@
                 </TextBlock>
 
                 <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon, UpdateSourceTrigger=PropertyChanged}" 
-                       Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" />
+                       Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" />
 
-                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
                            FontSize="32" Foreground="White">
                     <Run Text="{Binding Weather.list[0].main.temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
-                
+
                 <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
                            FontSize="18" Foreground="White">
                     <Run Text="{Binding Weather.list[0].weather[0].description}" />
@@ -115,9 +143,118 @@
                 </TextBlock>
             </Grid>
         </DockPanel>
-        
+
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                    </Grid.Background>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0">datum</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">slika</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">minmax</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">opis</TextBlock>
+                </Grid>
+
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                    </Grid.Background>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0">datum</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">slika</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">minmax</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">opis</TextBlock>
+                </Grid>
+
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                    </Grid.Background>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0">datum</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">slika</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">minmax</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">opis</TextBlock>
+                </Grid>
+
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                    </Grid.Background>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0">datum</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">slika</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">minmax</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">opis</TextBlock>
+                </Grid>
+
+                <Grid Margin="20">
+                    <Grid.Background>
+                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                    </Grid.Background>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width = "Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0">datum</TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0">slika</TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0">minmax</TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0">opis</TextBlock>
+                </Grid>
 
             </StackPanel>
         </DockPanel>
