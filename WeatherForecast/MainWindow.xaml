@@ -40,12 +40,13 @@
 
             <toolkit:AutoCompleteBox ItemsSource="{Binding Cities}"
                                      SelectedItem="{Binding SelectedCity, Mode=TwoWay}"
-                                     ValueMemberPath="name"
+                                     ValueMemberPath="id"
                                      ItemTemplate="{StaticResource CustomTemplate}"
                                      ItemFilter="{Binding CityFilter}"
+                                     IsTextCompletionEnabled="True"
                                      Width="170"
                                      Padding="5,3,5,3"
-                                     x:Name="Search" KeyUp="keyUpSearch"/>
+                                     x:Name="Search" KeyUp="keyUpSearch" SelectionChanged="selectChangedSearch"/>
 
         </Menu>
 
@@ -66,12 +67,12 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="White"
                            FontWeight="Bold" FontSize="24">
-                    <Run Text="{Binding Weather.city.name}" />
+                    <Run Text="{Binding Weather.city.name, UpdateSourceTrigger=PropertyChanged}" />
                     <Run Text="," />
-                    <Run Text="{Binding Weather.city.country}" />
+                    <Run Text="{Binding Weather.city.country, UpdateSourceTrigger=PropertyChanged}" />
                 </TextBlock>
 
-                <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon}" 
+                <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon, UpdateSourceTrigger=PropertyChanged}" 
                        Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" />
 
                 <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"

@@ -38,6 +38,20 @@ namespace WeatherForecast
         private void keyUpSearch(object sender, KeyEventArgs e)
         {
             forecastManager.resetCounter();
+            //if (e.Key == System.Windows.Input.Key.Enter)
+            //{
+            //    forecastManager.ChangeCity();
+            //}
+            
+        }
+
+        private void selectChangedSearch(object sender, SelectionChangedEventArgs e)
+        {
+            if (forecastManager.SelectedCity != null)
+            {
+                forecastManager.ChangeCity();
+                Search.Text = "";
+            }
         }
     }
 }

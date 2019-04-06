@@ -41,7 +41,7 @@ namespace WeatherForecast
             {
                 return (searchText, obj) =>
                 (obj as City).name.StartsWith(searchText)
-                && counter++ < 1000;
+                && counter++ < 10;
             }
         }
 
@@ -84,25 +84,33 @@ namespace WeatherForecast
         // Changes city to look for based on users choice
         // If the city is found this method will automatically read new info from API.
         // Returns true if the city exists else returns false
-        public bool ChangeCity(string cityName)
+
+        public void ChangeCity()
         {
-            City city = cityList.cities.FirstOrDefault(c => c.name.ToLower() == cityName.ToLower());
-
-            if (city == null)
-                return false;
-
-            CreateUrl(city.id);
+            if (selected == null) return;
+            CreateUrl(SelectedCity.id);
             RefreshData();
-
-            return true;
         }
+
+        //public bool ChangeCity(string cityName)
+        //{
+        //    City city = cityList.cities.FirstOrDefault(c => c.name.ToLower() == cityName.ToLower());
+
+        //    if (city == null)
+        //        return false;
+
+        //    CreateUrl(city.id);
+        //    RefreshData();
+
+        //    return true;
+        //}
 
         // Calls API and gets new information. 
         // Deserializes data into Weather property
         public void RefreshData()
         {
             string response = GetDataFromAPI();
-            weather = JsonConvert.DeserializeObject<Weather>(response);
+            Weather = JsonConvert.DeserializeObject<Weather>(response);
             FixData();
         }
 
@@ -110,10 +118,11 @@ namespace WeatherForecast
         {
             for (int i = 0; i < weather.list.Count(); i++)
             {
-                weather.list[i].weather[0].icon = @"./res/icons/" + weather.list[i].weather[0].icon + ".png";
-                weather.list[i].main.temp = weather.list[i].main.temp - 272.15;
-                weather.list[i].main.temp_min = weather.list[i].main.temp_min - 272.15;
-                weather.list[i].main.temp_max = weather.list[i].main.temp_max - 272.15;
+                Weather.list[i].weather[0].icon = @"./res/icons/" + Weather.list[i].weather[0].icon + ".png";
+                Weather.list[i].main.temp -= 272.15;
+                Weather.list[i].main.temp_min -= 272.15;
+                Weather.list[i].main.temp_max -= 272.15;
+                OnPropertyChanged("Weather");
             }
         }
 
