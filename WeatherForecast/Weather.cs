@@ -66,6 +66,7 @@ namespace WeatherForecast
     {
         public City city { get; set; }
         public IList<WeatherListItem> list { get; set; }
+        public IList<MyWeather> myList { get; set; }
     }
 
     public class CityList
@@ -79,4 +80,18 @@ namespace WeatherForecast
 
         public float longitude { get; set; }
     }
+
+    public class MyWeather
+    {
+        public double min_temp { get; set; }
+        public double max_temp { get; set; }
+        public string date { get; set; }
+        public int id { get; set; }
+        public string icon { get; set; }
+        public string description { get; set; }
+
+
+    }
+
+
 }

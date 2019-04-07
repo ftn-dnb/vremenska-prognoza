@@ -116,28 +116,64 @@ namespace WeatherForecast
 
         private void FixData()
         {
+            MyWeather mojObjekat = new MyWeather();
+            weather.myList = new List<MyWeather>();
+
+            mojObjekat.date = weather.list[0].dt_txt.Substring(0, 10);
+            mojObjekat.min_temp = weather.list[0].main.temp_max;
+            mojObjekat.max_temp = weather.list[0].main.temp_max;
+            mojObjekat.description = weather.list[0].weather[0].description;
+            mojObjekat.id = weather.list[0].weather[0].id;
+            mojObjekat.icon = @"./res/icons/" + Weather.list[0].weather[0].icon + ".png";
+
             for (int i = 0; i < weather.list.Count(); i++)
             {
                 Weather.list[i].weather[0].icon = @"./res/icons/" + Weather.list[i].weather[0].icon + ".png";
-                Weather.list[i].main.temp -= 272.15;
-                Weather.list[i].main.temp_min -= 272.15;
-                Weather.list[i].main.temp_max -= 272.15;
-                OnPropertyChanged("Weather");
+
+                if (weather.list[i].dt_txt.Contains(mojObjekat.date))
+                {
+                    if (weather.list[i].main.temp_min < mojObjekat.min_temp)
+                    {
+                        mojObjekat.min_temp = weather.list[i].main.temp_min;
+                    }
+
+                    if (weather.list[i].main.temp_max > mojObjekat.max_temp)
+                    {
+                        mojObjekat.max_temp = weather.list[i].main.temp_max;
+                    }
+                }
+
+                else
+                {
+                    mojObjekat.date = mojObjekat.date.Substring(8, 2) + "." + mojObjekat.date.Substring(5, 2) + "." + mojObjekat.date.Substring(0, 4) + ".";
+                    weather.myList.Add(mojObjekat);
+                    Console.WriteLine(mojObjekat.date);
+                    mojObjekat = new MyWeather();
+
+                    mojObjekat.date = weather.list[i].dt_txt.Substring(0, 10);
+                    mojObjekat.min_temp = weather.list[i].main.temp_min;
+                    mojObjekat.max_temp = weather.list[i].main.temp_max;
+                    mojObjekat.description = weather.list[i].weather[0].description;
+                    mojObjekat.id = weather.list[i].weather[0].id;
+                    mojObjekat.icon = weather.list[i].weather[0].icon;
+                }
             }
+
+            OnPropertyChanged("Weather");
         }
 
         // Creates new URL for API request based on latitude and longitude of the location
         private void CreateUrl(float latitude, float longitude)
         {
             apiUrl = @"http://api.openweathermap.org/data/2.5/forecast?lat=" 
-                    + latitude + "&lon=" + longitude + "&APPID=ba8c996f1de322109b5e38009ce08b63";
+                    + latitude + "&lon=" + longitude + "&units=metric&APPID=ba8c996f1de322109b5e38009ce08b63";
         }
 
         // Creates new URL for API request based on city id
         private void CreateUrl(int cityId)
         {
             apiUrl = @"http://api.openweathermap.org/data/2.5/forecast?id=" 
-                    + cityId + "&APPID=ba8c996f1de322109b5e38009ce08b63";
+                    + cityId + "&units=metric&APPID=ba8c996f1de322109b5e38009ce08b63";
         }
 
         private void FindMyLocation()
