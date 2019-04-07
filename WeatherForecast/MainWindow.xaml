@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WeatherForecast" x:Class="WeatherForecast.MainWindow"
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
-        Title="Weather Forecast" Width="720" Height="520" MinWidth="800" MinHeight="600">
+        Title="Weather Forecast" Width="860" Height="550" MinWidth="860" MinHeight="550">
     <Window.Resources>
         <DataTemplate x:Key="CustomTemplate">
             <StackPanel Orientation="Horizontal">
@@ -67,6 +67,7 @@
                                      VerticalAlignment="Center"
                                      FontSize="16"
                                      ToolTip="Search by a city name"
+                                     Text="Find a city..."
                                      x:Name="Search" KeyUp="keyUpSearch" SelectionChanged="selectChangedSearch">
 
             </toolkit:AutoCompleteBox>
@@ -148,7 +149,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Grid Margin="20">
                     <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
                     </Grid.Background>
                     
                     <Grid.ColumnDefinitions>
@@ -162,30 +163,28 @@
                         <RowDefinition Height = "*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" >
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" 
+                               FontSize="16" Foreground="White">
                         <Run Text="{Binding Weather.myList[0].date, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                             <Image Stretch="None" Source="{Binding Weather.myList[0].icon, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-                        <Run Text="Min:" />
-                        <Run Text="{Binding Weather.myList[0].min_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                        
-                        <Run Text="Max:" />
-                        <Run Text="{Binding Weather.myList[0].max_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />    
-                        
-                    </TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" FontSize="16">
                         <Run Text="{Binding Weather.myList[0].description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="White">
+                        <Run FontSize="32" Text="{Binding Weather.myList[0].max_temp, StringFormat=F0}" />
+                        <Run FontSize="32" Text="&#186;C " />    
+                        
+                        <Run FontSize="24" Text="{Binding Weather.myList[0].min_temp, StringFormat=F0}" />
+                        <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
 
                 <Grid Margin="20">
                     <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
                     </Grid.Background>
                     
                     <Grid.ColumnDefinitions>
@@ -199,29 +198,28 @@
                         <RowDefinition Height = "*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"
+                               FontSize="16" Foreground="White">
                         <Run Text="{Binding Weather.myList[1].date, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                         <Image Stretch="None" Source="{Binding Weather.myList[1].icon, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-                        <Run Text="Min:" />
-                        <Run Text="{Binding Weather.myList[1].min_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                        
-                        <Run Text="Max:" />
-                        <Run Text="{Binding Weather.myList[1].max_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                    </TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" FontSize="16">
                         <Run Text="{Binding Weather.myList[1].description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="White">
+                        <Run FontSize="32" Text="{Binding Weather.myList[1].max_temp, StringFormat=F0}" />
+                        <Run FontSize="32" Text="&#186;C " />
+                        
+                        <Run FontSize="24" Text="{Binding Weather.myList[1].min_temp, StringFormat=F0}" />
+                        <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
 
                 <Grid Margin="20">
                     <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
                     </Grid.Background>
                     
                     <Grid.ColumnDefinitions>
@@ -235,29 +233,28 @@
                         <RowDefinition Height = "*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0 " HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" Grid.Column="0 " HorizontalAlignment="Center"
+                               FontSize="16" Foreground="White">
                         <Run Text="{Binding Weather.myList[2].date, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                          <Image Stretch="None" Source="{Binding Weather.myList[2].icon, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-                        <Run Text="Min:" />
-                        <Run Text="{Binding Weather.myList[2].min_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                        
-                        <Run Text="Max:" />
-                        <Run Text="{Binding Weather.myList[2].max_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                    </TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" FontSize="16">
                         <Run Text="{Binding Weather.myList[2].description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="White">
+                        <Run FontSize="32" Text="{Binding Weather.myList[2].max_temp, StringFormat=F0}" />
+                        <Run FontSize="32" Text="&#186;C " />
+                        
+                        <Run FontSize="24" Text="{Binding Weather.myList[2].min_temp, StringFormat=F0}" />
+                        <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
 
                 <Grid Margin="20">
                     <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
                     </Grid.Background>
                     
                     <Grid.ColumnDefinitions>
@@ -271,29 +268,28 @@
                         <RowDefinition Height = "*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"
+                               FontSize="16" Foreground="White">
                         <Run Text="{Binding Weather.myList[3].date, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                         <Image Stretch="None" Source="{Binding Weather.myList[3].icon, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-                        <Run Text="Min:" />
-                        <Run Text="{Binding Weather.myList[3].min_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                        
-                        <Run Text="Max:" />
-                        <Run Text="{Binding Weather.myList[3].max_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                    </TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" FontSize="16">
                         <Run Text="{Binding Weather.myList[3].description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="White">
+                        <Run FontSize="32" Text="{Binding Weather.myList[3].max_temp, StringFormat=F0}" />
+                        <Run FontSize="32" Text="&#186;C " />
+                        
+                        <Run FontSize="24" Text="{Binding Weather.myList[3].min_temp, StringFormat=F0}" />
+                        <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
 
                 <Grid Margin="20">
                     <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4"></SolidColorBrush>
+                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
                     </Grid.Background>
                     
                     <Grid.ColumnDefinitions>
@@ -307,23 +303,22 @@
                         <RowDefinition Height = "*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"
+                               FontSize="16" Foreground="White">
                            <Run Text="{Binding Weather.myList[4].date, UpdateSourceTrigger=PropertyChanged}"/>
                     </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
                         <Image Stretch="None" Source="{Binding Weather.myList[4].icon, UpdateSourceTrigger=PropertyChanged}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
-                        <Run Text="Min:" />
-                        <Run Text="{Binding Weather.myList[4].min_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                        
-                        <Run Text="Max:" />
-                        <Run Text="{Binding Weather.myList[4].max_temp, StringFormat=F0}" />
-                        <Run Text="&#186;C" />
-                    </TextBlock>
-                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Foreground="White" FontSize="16">
                         <Run Text="{Binding Weather.myList[4].description, UpdateSourceTrigger=PropertyChanged}"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Foreground="White">
+                        <Run FontSize="32" Text="{Binding Weather.myList[4].max_temp, StringFormat=F0}" />
+                        <Run FontSize="32" Text="&#186;C " />
+                        
+                        <Run FontSize="24" Text="{Binding Weather.myList[4].min_temp, StringFormat=F0}" />
+                        <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
 
