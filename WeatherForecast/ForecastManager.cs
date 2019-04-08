@@ -87,10 +87,11 @@ namespace WeatherForecast
         // Adds selected city (from autocomplete box) to the history city list
         private void AddCityToHistory()
         {
-            City city = History.FirstOrDefault(c => c.id.Equals(selected.id));
+            // This part of code is for if we don't want duplicates in history list
+            //City city = History.FirstOrDefault(c => c.id.Equals(selected.id));
 
-            if (city != null)
-                return;
+            //if (city != null)
+            //    return;
 
             History.Add(selected);
             SaveCitiesToFile(History, historyCitiesPath);
@@ -273,13 +274,16 @@ namespace WeatherForecast
         {
             IList<City> cities = new List<City>();
 
+            if (!File.Exists(path))
+                return new List<City>();
+
             using (StreamReader reader = new StreamReader(path))
             {
                 string data = reader.ReadToEnd();
                 cities = JsonConvert.DeserializeObject<IList<City>>(data);
             }
 
-            return cities;
+            return (cities == null) ? new List<City>() : cities;
         }
     }
 }

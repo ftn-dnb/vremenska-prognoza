@@ -51,7 +51,7 @@ namespace WeatherForecast
         {
             if (forecastManager.SelectedCity != null)
             {
-                AddMenuItemToHistoryCities(forecastManager.SelectedCity);
+                menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
                 forecastManager.ChangeCity();
                 Search.Text = "";
             }
@@ -62,27 +62,28 @@ namespace WeatherForecast
             MenuItem clickedItem = (MenuItem)sender;
             City city = (City)clickedItem.DataContext;
             forecastManager.SelectedCity = city;
+            menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
             forecastManager.ChangeCity();
         }
 
         private void FillMenuItemHistory()
         {
-            foreach (City city in forecastManager.History)
+            foreach (City city in forecastManager.History.Reverse())
             {
-                AddMenuItemToHistoryCities(city);
+                menuitem_history.Items.Add(CreateCityMenuItem(city));
             }
         }
 
-        private void AddMenuItemToHistoryCities(City city)
+        private MenuItem CreateCityMenuItem(City city)
         {
             MenuItem item = new MenuItem();
             item.DataContext = city;
-            item.Header = city.name;
+            item.Header = city.name + ", " + city.country;
             item.Click += menuitem_history_OnClick;
             item.Foreground = Brushes.Black;
             item.FontWeight = FontWeights.Normal;
 
-            menuitem_history.Items.Add(item);
+            return item;
         }
     }
 }
