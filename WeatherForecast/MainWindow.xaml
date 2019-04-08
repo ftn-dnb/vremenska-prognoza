@@ -83,7 +83,7 @@
         <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Center">
 
             <Grid x:Name = "LayoutMainInfo" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  Margin="10">
+                  Margin="10 40 10 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "Auto" />
                     <ColumnDefinition />
@@ -120,14 +120,14 @@
                 <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Min. temp:" />
-                    <Run Text="{Binding Weather.list[0].main.temp_min, StringFormat=F0}" />
+                    <Run Text="{Binding Weather.myList[0].min_temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Max. temp:" />
-                    <Run Text="{Binding Weather.list[0].main.temp_max, StringFormat=F0}" />
+                    <Run Text="{Binding Weather.myList[0].max_temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
