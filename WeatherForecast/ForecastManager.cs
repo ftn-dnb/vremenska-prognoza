@@ -16,6 +16,7 @@ namespace WeatherForecast
     public class ForecastManager : INotifyPropertyChanged
     {
         private const string cityListFilePath = @"../../resources/city_list.json";
+        private const string historyCitiesPath = @"../../res/history.json";
         private const string urlGeoIpDb = @"https://geoip-db.com/json";
 
         private string apiUrl;
@@ -45,6 +46,7 @@ namespace WeatherForecast
             }
         }
 
+        public IList<City> History { get; set; }
 
         private Weather weather;
         public Weather Weather
@@ -74,22 +76,34 @@ namespace WeatherForecast
             {
                 (Cities as List<City>).Add(city);
             }
-            
+
+            // TODO change this to read history cities from file
+            History = LoadCitiesFromFile(historyCitiesPath);
             
             thread = new Thread(new ThreadStart(ReadData));
             thread.IsBackground = true;
             thread.Start();
         }
 
-        // Changes city to look for based on users choice
-        // If the city is found this method will automatically read new info from API.
-        // Returns true if the city exists else returns false
+        // Adds selected city (from autocomplete box) to the history city list
+        private void AddCityToHistory()
+        {
+            City city = History.FirstOrDefault(c => c.id.Equals(selected.id));
 
+            if (city != null)
+                return;
+
+            History.Add(selected);
+            SaveCitiesToFile(History, historyCitiesPath);
+        }
+
+        // Changes city to look for based on users choice
         public void ChangeCity()
         {
             if (selected == null) return;
             CreateUrl(SelectedCity.id);
             RefreshData();
+            AddCityToHistory();
         }
 
         //public bool ChangeCity(string cityName)
@@ -178,7 +192,6 @@ namespace WeatherForecast
 
         private void FindMyLocation()
         {
-
             disableCertificate();
             string data = new WebClient().DownloadString(urlGeoIpDb);
             IPLocation location = JsonConvert.DeserializeObject<IPLocation>(data);
@@ -244,6 +257,31 @@ namespace WeatherForecast
                 string data = stream.ReadToEnd();
                 cityList = JsonConvert.DeserializeObject<CityList>(data);
             }
+        }
+
+        // Saves cities to the file on specified path
+        private void SaveCitiesToFile(IList<City> cities, string path)
+        {
+            string citiesJson = JsonConvert.SerializeObject(cities);
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                writer.Write(citiesJson);
+            }
+        }
+
+        // Loads cities from specified path
+        private IList<City> LoadCitiesFromFile(string path)
+        {
+            IList<City> cities = new List<City>();
+
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string data = reader.ReadToEnd();
+                cities = JsonConvert.DeserializeObject<IList<City>>(data);
+            }
+
+            return cities;
         }
     }
 }
