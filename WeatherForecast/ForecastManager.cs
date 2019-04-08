@@ -77,7 +77,6 @@ namespace WeatherForecast
                 (Cities as List<City>).Add(city);
             }
 
-            // TODO change this to read history cities from file
             History = LoadCitiesFromFile(historyCitiesPath);
             
             thread = new Thread(new ThreadStart(ReadData));
@@ -213,7 +212,6 @@ namespace WeatherForecast
                     return true;
                 };
         }
-
 
         // Reads new data every 10 minutes from the API
         private void ReadData()

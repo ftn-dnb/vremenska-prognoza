@@ -74,7 +74,9 @@
 
             <Button x:Name="btn_show_favs" Content="Favs" />
 
-            <Button x:Name="btn_show_history" Content="History"/>
+            <MenuItem x:Name="menuitem_history" Header="History" ToolTip="View all cities from the past"
+                      FontWeight="Bold" Foreground="White">
+            </MenuItem>
 
         </Menu>
 

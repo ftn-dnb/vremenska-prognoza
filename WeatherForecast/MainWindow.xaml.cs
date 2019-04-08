@@ -28,6 +28,8 @@ namespace WeatherForecast
             InitializeComponent();
             forecastManager = new ForecastManager();
             this.DataContext = forecastManager;
+
+            FillMenuItemHistory();
         }
 
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
@@ -49,9 +51,38 @@ namespace WeatherForecast
         {
             if (forecastManager.SelectedCity != null)
             {
+                AddMenuItemToHistoryCities(forecastManager.SelectedCity);
                 forecastManager.ChangeCity();
                 Search.Text = "";
             }
+        }
+
+        private void menuitem_history_OnClick(object sender, EventArgs e)
+        {
+            MenuItem clickedItem = (MenuItem)sender;
+            City city = (City)clickedItem.DataContext;
+            forecastManager.SelectedCity = city;
+            forecastManager.ChangeCity();
+        }
+
+        private void FillMenuItemHistory()
+        {
+            foreach (City city in forecastManager.History)
+            {
+                AddMenuItemToHistoryCities(city);
+            }
+        }
+
+        private void AddMenuItemToHistoryCities(City city)
+        {
+            MenuItem item = new MenuItem();
+            item.DataContext = city;
+            item.Header = city.name;
+            item.Click += menuitem_history_OnClick;
+            item.Foreground = Brushes.Black;
+            item.FontWeight = FontWeights.Normal;
+
+            menuitem_history.Items.Add(item);
         }
     }
 }
