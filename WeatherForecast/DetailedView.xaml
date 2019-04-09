@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WeatherForecast"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
-        Title="DetailedView" Height="500" Width="500">
+        Title="DetailedView" Height="415.334" Width="500">
     <DockPanel>
         <DockPanel.Background>
             <ImageBrush ImageSource="./res/background.png" Stretch="UniformToFill"/>
@@ -29,66 +29,85 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="White"
                            FontWeight="Bold" FontSize="24">
-                    <Run Text="{Binding Weather.city.name, UpdateSourceTrigger=PropertyChanged}" />
+                    <Run Text="{Binding ForecastManager.Weather.city.name, UpdateSourceTrigger=PropertyChanged}" />
                     <Run Text="," />
-                    <Run Text="{Binding Weather.city.country, UpdateSourceTrigger=PropertyChanged}" />
+                    <Run Text="{Binding ForecastManager.Weather.city.country, UpdateSourceTrigger=PropertyChanged}" />
                 </TextBlock>
 
-                <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon, UpdateSourceTrigger=PropertyChanged}" 
+                <Image Stretch="None" Source="{Binding MyWeather.icon, UpdateSourceTrigger=PropertyChanged}" 
                        Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" />
 
                 <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
                            FontSize="32" Foreground="White">
-                    <Run Text="{Binding Weather.list[0].main.temp, StringFormat=F0}" />
+                    <Run Text="{Binding Item.main.temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
                            FontSize="18" Foreground="White">
-                    <Run Text="{Binding Weather.list[0].weather[0].description}" />
+                    <Run Text="{Binding Item.description}" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Min. temp:" />
-                    <Run Text="{Binding Weather.list[0].main.temp_min, StringFormat=F0}" />
+                    <Run Text="{Binding Item.main.temp_min, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Max. temp:" />
-                    <Run Text="{Binding Weather.list[0].main.temp_max, StringFormat=F0}" />
+                    <Run Text="{Binding Item.main.temp_max, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Pressure:" />
-                    <Run Text="{Binding Weather.list[0].main.pressure}" />
+                    <Run Text="{Binding Item.main.pressure}" />
                     <Run Text="mbar" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Humidity:" />
-                    <Run Text="{Binding Weather.list[0].main.humidity}" />
+                    <Run Text="{Binding Item.main.humidity}" />
                     <Run Text="%" />
                 </TextBlock>
             </Grid>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
-            <Grid>
-                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Left" 
+        <ScrollViewer>
+            <Grid Height="Auto">
+                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
 
-		            Margin="33,0,0,620" Name="columnChart" Title="Column Series Demo" 
+		                Margin="10,0,10,561.333" Name="lineChart" Title="Hourly temperature" 
 
-		            VerticalAlignment="Bottom" Width="Auto">
-                    <chartingToolkit:ColumnSeries DependentValuePath="Value" 
+		                VerticalAlignment="Bottom" Width="456" >
+                    <chartingToolkit:LineSeries DependentValuePath="Value" 
 
-		            IndependentValuePath="Key" ItemsSource="{Binding}" />
+		                IndependentValuePath="Key" ItemsSource="{Binding}" />
+                </chartingToolkit:Chart>
+                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
+
+		                Margin="10,0,10,393.333" Name="lineChart1" Title="Hourly pressure" 
+
+		                VerticalAlignment="Bottom" Width="456" >
+                    <chartingToolkit:LineSeries DependentValuePath="Value" 
+
+		                IndependentValuePath="Key" ItemsSource="{Binding}" />
+                </chartingToolkit:Chart>
+                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
+
+		                Margin="10,0,10,225.333" Name="lineChart2" Title="Hourly humidity" 
+
+		                VerticalAlignment="Bottom" Width="456" >
+                    <chartingToolkit:LineSeries DependentValuePath="Value" 
+
+		                IndependentValuePath="Key" ItemsSource="{Binding}" />
                 </chartingToolkit:Chart>
             </Grid>
-        </DockPanel>
+        </ScrollViewer>
+
     </DockPanel>
 </Window>
