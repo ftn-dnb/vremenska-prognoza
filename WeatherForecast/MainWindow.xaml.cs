@@ -51,7 +51,9 @@ namespace WeatherForecast
         {
             if (forecastManager.SelectedCity != null)
             {
-                menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
+                if (!forecastManager.History.Any(c => c.id.Equals(forecastManager.SelectedCity.id)))
+                    menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
+                
                 forecastManager.ChangeCity();
                 Search.Text = "";
             }
@@ -97,7 +99,6 @@ namespace WeatherForecast
             MenuItem clickedItem = (MenuItem)sender;
             City city = (City)clickedItem.DataContext;
             forecastManager.SelectedCity = city;
-            menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
             forecastManager.ChangeCity();
         }
 
