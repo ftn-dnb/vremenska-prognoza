@@ -125,6 +125,7 @@ namespace WeatherForecast
             mojObjekat.description = weather.list[0].weather[0].description;
             mojObjekat.id = weather.list[0].weather[0].id;
             mojObjekat.icon = @"./res/icons/" + Weather.list[0].weather[0].icon + ".png";
+            mojObjekat.original_date = weather.list[0].dt_txt.Substring(0, 10);
 
             for (int i = 0; i < weather.list.Count(); i++)
             {
@@ -150,6 +151,7 @@ namespace WeatherForecast
                     Console.WriteLine(mojObjekat.date);
                     mojObjekat = new MyWeather();
 
+                    mojObjekat.original_date = weather.list[i].dt_txt.Substring(0, 10);
                     mojObjekat.date = weather.list[i].dt_txt.Substring(0, 10);
                     mojObjekat.min_temp = weather.list[i].main.temp_min;
                     mojObjekat.max_temp = weather.list[i].main.temp_max;

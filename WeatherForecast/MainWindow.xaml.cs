@@ -53,5 +53,40 @@ namespace WeatherForecast
                 Search.Text = "";
             }
         }
+
+        private void day1_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[0]);
+            s.ShowDialog();
+        }
+
+        private void day2_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[1]);
+            s.ShowDialog();
+        }
+
+        private void day3_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[2]);
+            s.ShowDialog();
+        }
+
+        private void day4_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[3]);
+            s.ShowDialog();
+        }
+
+        private void day5_click(object sender, MouseButtonEventArgs e)
+        {
+            //ako je api u kurcu
+            try
+            {
+                var s = new DetailedView(forecastManager, forecastManager.Weather.myList[4]);
+                s.ShowDialog();
+            } catch(Exception ex) { }
+            
+        }
     }
 }
