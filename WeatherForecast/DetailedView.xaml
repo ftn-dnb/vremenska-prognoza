@@ -25,6 +25,7 @@
                     <RowDefinition Height = "*" />
                     <RowDefinition Height = "*" />
                     <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="White"
@@ -74,6 +75,20 @@
                     <Run Text="Humidity:" />
                     <Run Text="{Binding Item.main.humidity}" />
                     <Run Text="%" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
+                           FontSize="14" Foreground="White">
+                    <Run Text="Wind speed:" />
+                    <Run Text="{Binding Item.wind.speed, StringFormat=N2}" />
+                    <Run Text="m/s" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
+                           FontSize="14" Foreground="White">
+                    <Run Text="Rain:" />
+                    <Run Text="{Binding Item.rain.rain3h, StringFormat=N2}" />
+                    <Run Text="mm" />
                 </TextBlock>
             </Grid>
         </DockPanel>

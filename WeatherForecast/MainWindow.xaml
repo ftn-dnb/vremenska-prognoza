@@ -97,6 +97,7 @@
                     <RowDefinition Height = "*" />
                     <RowDefinition Height = "*" />
                     <RowDefinition Height = "*" />
+                    <RowDefinition Height = "*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="White"
@@ -147,15 +148,27 @@
                     <Run Text="{Binding Weather.list[0].main.humidity}" />
                     <Run Text="%" />
                 </TextBlock>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
+                           FontSize="14" Foreground="White">
+                    <Run Text="Wind speed:" />
+                    <Run Text="{Binding Weather.list[0].wind.speed, StringFormat=N2}" />
+                    <Run Text="m/s" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
+                           FontSize="14" Foreground="White">
+                    <Run Text="Rain:" />
+                    <Run Text="{Binding Weather.list[0].rain.rain3h, StringFormat=N2}" />
+                    <Run Text="mm" />
+                </TextBlock>
             </Grid>
         </DockPanel>
 
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                <Grid Margin="20" PreviewMouseDown="day1_click" >
-
-
+                <Grid Margin="20" PreviewMouseDown="day1_click" Cursor="Hand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -186,10 +199,8 @@
                     </TextBlock>
                 </Grid>
 
-
-                    <Grid Margin="20" PreviewMouseDown="day2_click">
-
-                        <Grid.ColumnDefinitions>
+                <Grid Margin="20" PreviewMouseDown="day2_click" Cursor="Hand">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
@@ -219,8 +230,7 @@
                     </TextBlock>
                 </Grid>
 
-                <Grid Margin="20" PreviewMouseDown="day3_click">
-
+                <Grid Margin="20" PreviewMouseDown="day3_click" Cursor="Hand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -251,9 +261,7 @@
                     </TextBlock>
                 </Grid>
 
-
-                <Grid Margin="20" PreviewMouseDown="day4_click">
-
+                <Grid Margin="20" PreviewMouseDown="day4_click" Cursor="Hand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -283,10 +291,9 @@
                         <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
-                
-                <Grid Margin="20" PreviewMouseDown="day5_click">
 
-                        <Grid.ColumnDefinitions>
+                <Grid Margin="20" PreviewMouseDown="day5_click" Cursor="Hand">
+                    <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
