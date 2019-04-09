@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WeatherForecast"
         xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
-        Title="DetailedView" Height="415.334" Width="500">
+        Title="Weather Forecast - Datailed view"  Width="860" Height="550" MinWidth="860" MinHeight="550">
     <DockPanel>
         <DockPanel.Background>
             <ImageBrush ImageSource="./res/background.png" Stretch="UniformToFill"/>
@@ -79,29 +79,29 @@
         </DockPanel>
         <ScrollViewer>
             <Grid Height="Auto">
-                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
+                <chartingToolkit:Chart BorderBrush="White" Height="Auto" HorizontalAlignment="Center" Foreground="White"
 
 		                Margin="10,0,10,561.333" Name="lineChart" Title="Hourly temperature" 
 
-		                VerticalAlignment="Bottom" Width="456" >
+		                VerticalAlignment="Bottom" Width="600" >
                     <chartingToolkit:LineSeries DependentValuePath="Value" 
 
 		                IndependentValuePath="Key" ItemsSource="{Binding}" />
                 </chartingToolkit:Chart>
-                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
+                <chartingToolkit:Chart BorderBrush="White" Height="Auto" HorizontalAlignment="Center" Foreground="White"
 
 		                Margin="10,0,10,393.333" Name="lineChart1" Title="Hourly pressure" 
 
-		                VerticalAlignment="Bottom" Width="456" >
+		                VerticalAlignment="Bottom" Width="600" >
                     <chartingToolkit:LineSeries DependentValuePath="Value" 
 
 		                IndependentValuePath="Key" ItemsSource="{Binding}" />
                 </chartingToolkit:Chart>
-                <chartingToolkit:Chart Height="Auto" HorizontalAlignment="Center" 
+                <chartingToolkit:Chart BorderBrush="White" Height="Auto" HorizontalAlignment="Center" Foreground="White"
 
 		                Margin="10,0,10,225.333" Name="lineChart2" Title="Hourly humidity" 
 
-		                VerticalAlignment="Bottom" Width="456" >
+		                VerticalAlignment="Bottom" Width="600" >
                     <chartingToolkit:LineSeries DependentValuePath="Value" 
 
 		                IndependentValuePath="Key" ItemsSource="{Binding}" />
