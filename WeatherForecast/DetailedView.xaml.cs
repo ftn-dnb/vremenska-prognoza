@@ -69,8 +69,8 @@ namespace WeatherForecast
             
 
             lineChart.DataContext = valueList;
-            lineChart1.DataContext = valueList;
-            lineChart2.DataContext = valueList;
+            lineChart1.DataContext = valueList1;
+            lineChart2.DataContext = valueList2;
         }
 
         private void InitializeWeather()

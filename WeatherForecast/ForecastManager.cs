@@ -110,18 +110,6 @@ namespace WeatherForecast
             AddCityToHistory();
         }
 
-        //public bool ChangeCity(string cityName)
-        //{
-        //    City city = cityList.cities.FirstOrDefault(c => c.name.ToLower() == cityName.ToLower());
-
-        //    if (city == null)
-        //        return false;
-
-        //    CreateUrl(city.id);
-        //    RefreshData();
-
-        //    return true;
-        //}
 
         // Calls API and gets new information. 
         // Deserializes data into Weather property
@@ -177,6 +165,11 @@ namespace WeatherForecast
                     mojObjekat.id = weather.list[i].weather[0].id;
                     mojObjekat.icon = weather.list[i].weather[0].icon;
                 }
+            }
+
+            if (weather.myList.Count() < 5)
+            {
+                weather.myList.Add(mojObjekat);
             }
 
             OnPropertyChanged("Weather");
