@@ -30,6 +30,7 @@ namespace WeatherForecast
             this.DataContext = forecastManager;
 
             FillMenuItemHistory();
+            FillMenuItemFavs();
         }
 
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
@@ -66,6 +67,8 @@ namespace WeatherForecast
             forecastManager.ChangeCity();
         }
 
+        
+
         private void FillMenuItemHistory()
         {
             foreach (City city in forecastManager.History.Reverse())
@@ -85,5 +88,68 @@ namespace WeatherForecast
 
             return item;
         }
+
+        private void Btn_add_fav_Click(object sender, RoutedEventArgs e)
+        {
+            City city = forecastManager.Weather.city;
+            int id = city.id;
+            bool exist = forecastManager.Favorites.Any(cityI => cityI.id == id);
+            if (exist)
+            {
+                forecastManager.Favorites = forecastManager.Favorites.Where(cityI => cityI.id != id).ToList();
+                for(int i = 0; i < menuitem_favs.Items.Count; i++)
+                {
+                    MenuItem item = (MenuItem)menuitem_favs.Items.GetItemAt(i);
+                    City currCity = (City)item.DataContext;
+                    if(city.id == currCity.id)
+                    {
+                        menuitem_favs.Items.RemoveAt(i);
+                        forecastManager.saveFavs();
+                        break;
+                 
+                    }
+                }
+            }
+            else
+            {
+                forecastManager.Favorites.Add(city);
+                CreateCityMenuItemFavs(city);
+                menuitem_favs.Items.Insert(0, CreateCityMenuItemFavs(city));
+                forecastManager.saveFavs();
+            }
+        }
+
+
+        private void menuitem_favs_OnClick(object sender, EventArgs e)
+        {
+            MenuItem clickedItem = (MenuItem)sender;
+            City city = (City)clickedItem.DataContext;
+            forecastManager.SelectedCity = city;
+            forecastManager.ChangeCity();
+
+        }
+
+        private void FillMenuItemFavs()
+        {
+            foreach (City city in forecastManager.Favorites.Reverse())
+            {
+                menuitem_favs.Items.Add(CreateCityMenuItemFavs(city));
+            }
+        }
+
+
+        private MenuItem CreateCityMenuItemFavs(City city)
+        {
+            MenuItem item = new MenuItem();
+            item.DataContext = city;
+            item.Header = city.name + ", " + city.country;
+            item.Click += menuitem_favs_OnClick;
+            item.Foreground = Brushes.Black;
+            item.FontWeight = FontWeights.Normal;
+
+            return item;
+
+        }
+
     }
 }

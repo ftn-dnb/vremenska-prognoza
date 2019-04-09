@@ -17,6 +17,7 @@ namespace WeatherForecast
     {
         private const string cityListFilePath = @"../../resources/city_list.json";
         private const string historyCitiesPath = @"../../res/history.json";
+        private const string favoritesCitiesPath = @"../../res/favorites.json";
         private const string urlGeoIpDb = @"https://geoip-db.com/json";
 
         private string apiUrl;
@@ -59,6 +60,8 @@ namespace WeatherForecast
             }
         }
 
+        public IList<City> Favorites { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string name)
         {
@@ -78,7 +81,9 @@ namespace WeatherForecast
             }
 
             History = LoadCitiesFromFile(historyCitiesPath);
-            
+            Favorites = LoadCitiesFromFile(favoritesCitiesPath);
+
+
             thread = new Thread(new ThreadStart(ReadData));
             thread.IsBackground = true;
             thread.Start();
@@ -96,7 +101,7 @@ namespace WeatherForecast
             History.Add(selected);
             SaveCitiesToFile(History, historyCitiesPath);
         }
-
+        
         // Changes city to look for based on users choice
         public void ChangeCity()
         {
@@ -285,5 +290,11 @@ namespace WeatherForecast
 
             return (cities == null) ? new List<City>() : cities;
         }
+
+        public void saveFavs()
+        {
+            SaveCitiesToFile(Favorites, favoritesCitiesPath);
+        }
+
     }
 }

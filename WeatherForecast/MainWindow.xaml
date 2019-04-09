@@ -51,7 +51,7 @@
             </Button>
 
             <Button x:Name="btn_add_fav" Background="Transparent" BorderThickness="0"
-                    Style="{StaticResource MyButtonStyle}" ToolTip="Add to favourites">
+                    Style="{StaticResource MyButtonStyle}" ToolTip="Add to favourites" Click="Btn_add_fav_Click">
                 <Image Source="./res/icons/addtofav.png" Width="32" Height="32"></Image>
             </Button>
 
@@ -72,7 +72,9 @@
 
             </toolkit:AutoCompleteBox>
 
-            <Button x:Name="btn_show_favs" Content="Favs" />
+            <MenuItem x:Name="menuitem_favs" Header="Favs" ToolTip="View all favorite cities"
+                      FontWeight="Bold" Foreground="White">
+            </MenuItem>
 
             <MenuItem x:Name="menuitem_history" Header="History" ToolTip="View all cities from the past"
                       FontWeight="Bold" Foreground="White">
@@ -150,10 +152,7 @@
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Grid Margin="20">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
-                    </Grid.Background>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -185,10 +184,7 @@
                 </Grid>
 
                 <Grid Margin="20">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
-                    </Grid.Background>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -220,9 +216,7 @@
                 </Grid>
 
                 <Grid Margin="20">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
-                    </Grid.Background>
+
                     
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
@@ -255,10 +249,7 @@
                 </Grid>
 
                 <Grid Margin="20">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
-                    </Grid.Background>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -290,9 +281,7 @@
                 </Grid>
 
                 <Grid Margin="20">
-                    <Grid.Background>
-                        <SolidColorBrush Color="#3f98f4" Opacity="0.35"></SolidColorBrush>
-                    </Grid.Background>
+
                     
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
