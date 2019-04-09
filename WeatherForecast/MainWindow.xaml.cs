@@ -86,13 +86,15 @@ namespace WeatherForecast
 
         private void day5_click(object sender, MouseButtonEventArgs e)
         {
-            //ako je api u kurcu
             try
             {
                 var s = new DetailedView(forecastManager, forecastManager.Weather.myList[4]);
                 s.ShowDialog();
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                
+            }
         }
             
         private void menuitem_history_OnClick(object sender, EventArgs e)

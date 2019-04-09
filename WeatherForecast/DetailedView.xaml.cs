@@ -62,9 +62,9 @@ namespace WeatherForecast
             List<KeyValuePair<string, double>> valueList2 = new List<KeyValuePair<string, double>>();
             foreach (var item in hours_list)
             {
-                valueList.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(12,5), item.main.temp));
-                valueList1.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(12,5), item.main.pressure));
-                valueList2.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(12,5), item.main.humidity));
+                valueList.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(11,5), item.main.temp));
+                valueList1.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(11,5), item.main.pressure));
+                valueList2.Add(new KeyValuePair<string, double>(item.dt_txt.Substring(11,5), item.main.humidity));
             }
             
 
