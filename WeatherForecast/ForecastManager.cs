@@ -87,11 +87,10 @@ namespace WeatherForecast
         // Adds selected city (from autocomplete box) to the history city list
         private void AddCityToHistory()
         {
-            // This part of code is for if we don't want duplicates in history list
-            //City city = History.FirstOrDefault(c => c.id.Equals(selected.id));
+            City city = History.FirstOrDefault(c => c.id.Equals(selected.id));
 
-            //if (city != null)
-            //    return;
+            if (city != null)
+                return;
 
             History.Add(selected);
             SaveCitiesToFile(History, historyCitiesPath);
