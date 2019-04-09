@@ -52,14 +52,14 @@
                 <TextBlock Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Min. temp:" />
-                    <Run Text="{Binding Item.main.temp_min, StringFormat=F0}" />
+                    <Run Text="{Binding MyWeather.min_temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
                 <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Margin="3"
                            FontSize="14" Foreground="White">
                     <Run Text="Max. temp:" />
-                    <Run Text="{Binding Item.main.temp_max, StringFormat=F0}" />
+                    <Run Text="{Binding MyWeather.max_temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>
 
