@@ -89,7 +89,7 @@ namespace WeatherForecast
         public int id { get; set; }
         public string icon { get; set; }
         public string description { get; set; }
-
+        public string original_date { get; set; }
 
     }
 

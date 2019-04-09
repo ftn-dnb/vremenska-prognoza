@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WeatherForecast" x:Class="WeatherForecast.MainWindow"
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        
         Title="Weather Forecast" Width="860" Height="550" MinWidth="860" MinHeight="550">
     <Window.Resources>
         <DataTemplate x:Key="CustomTemplate">
@@ -151,7 +152,9 @@
 
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Grid Margin="20">
+
+                <Grid Margin="20" PreviewMouseDown="day1_click" >
+
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
@@ -183,9 +186,10 @@
                     </TextBlock>
                 </Grid>
 
-                <Grid Margin="20">
 
-                    <Grid.ColumnDefinitions>
+                    <Grid Margin="20" PreviewMouseDown="day2_click">
+
+                        <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
@@ -215,9 +219,8 @@
                     </TextBlock>
                 </Grid>
 
-                <Grid Margin="20">
+                <Grid Margin="20" PreviewMouseDown="day3_click">
 
-                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
@@ -248,7 +251,8 @@
                     </TextBlock>
                 </Grid>
 
-                <Grid Margin="20">
+
+                <Grid Margin="20" PreviewMouseDown="day4_click">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
@@ -279,11 +283,10 @@
                         <Run FontSize="24" Text="&#186;C" />
                     </TextBlock>
                 </Grid>
+                
+                <Grid Margin="20" PreviewMouseDown="day5_click">
 
-                <Grid Margin="20">
-
-                    
-                    <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>

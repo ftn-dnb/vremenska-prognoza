@@ -52,18 +52,54 @@ namespace WeatherForecast
         {
             if (forecastManager.SelectedCity != null)
             {
-                menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
+                if (!forecastManager.History.Any(c => c.id.Equals(forecastManager.SelectedCity.id)))
+                    menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
+                
                 forecastManager.ChangeCity();
                 Search.Text = "";
             }
         }
 
+        private void day1_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[0]);
+            s.ShowDialog();
+        }
+
+        private void day2_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[1]);
+            s.ShowDialog();
+        }
+
+        private void day3_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[2]);
+            s.ShowDialog();
+        }
+
+        private void day4_click(object sender, MouseButtonEventArgs e)
+        {
+            var s = new DetailedView(forecastManager, forecastManager.Weather.myList[3]);
+            s.ShowDialog();
+        }
+
+        private void day5_click(object sender, MouseButtonEventArgs e)
+        {
+            //ako je api u kurcu
+            try
+            {
+                var s = new DetailedView(forecastManager, forecastManager.Weather.myList[4]);
+                s.ShowDialog();
+            }
+            catch (Exception ex) { }
+        }
+            
         private void menuitem_history_OnClick(object sender, EventArgs e)
         {
             MenuItem clickedItem = (MenuItem)sender;
             City city = (City)clickedItem.DataContext;
             forecastManager.SelectedCity = city;
-            menuitem_history.Items.Insert(0, CreateCityMenuItem(forecastManager.SelectedCity));
             forecastManager.ChangeCity();
         }
 
