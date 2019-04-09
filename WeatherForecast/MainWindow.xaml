@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:WeatherForecast" x:Class="WeatherForecast.MainWindow"
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         
-        Title="Weather Forecast" Width="860" Height="550" MinWidth="860" MinHeight="550">
+        Title="Weather Forecast" Width="860" Height="550" MinWidth="865" MinHeight="550">
     <Window.Resources>
         <DataTemplate x:Key="CustomTemplate">
             <StackPanel Orientation="Horizontal">
@@ -110,8 +110,8 @@
                 <Image Stretch="None" Source="{Binding Weather.list[0].weather[0].icon, UpdateSourceTrigger=PropertyChanged}" 
                        Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" />
 
-                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           FontSize="32" Foreground="White">
+                <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontSize="32" Foreground="White" Grid.ColumnSpan="2">
                     <Run Text="{Binding Weather.list[0].main.temp, StringFormat=F0}" />
                     <Run Text="&#186;C" />
                 </TextBlock>

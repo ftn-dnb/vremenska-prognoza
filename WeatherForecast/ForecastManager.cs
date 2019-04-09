@@ -154,7 +154,6 @@ namespace WeatherForecast
                 {
                     mojObjekat.date = mojObjekat.date.Substring(8, 2) + "." + mojObjekat.date.Substring(5, 2) + "." + mojObjekat.date.Substring(0, 4) + ".";
                     weather.myList.Add(mojObjekat);
-                    Console.WriteLine(mojObjekat.date);
                     mojObjekat = new MyWeather();
 
                     mojObjekat.original_date = weather.list[i].dt_txt.Substring(0, 10);
